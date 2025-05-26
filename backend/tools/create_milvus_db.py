@@ -29,6 +29,11 @@ embedding_function = model.dense.SentenceTransformerEmbeddingFunction(
 file_path = "backend/data/SNOMED_5000.csv"
 db_path = "backend/db/snomed_bge_m3.db"
 
+# import os
+
+# # Create the directory if it doesn't exist
+# os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
 # 连接到 Milvus
 client = MilvusClient(db_path)
 

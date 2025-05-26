@@ -15,3 +15,7 @@ nvm install 20 && nvm use 20
 现在我们已经切换到了 Node.js v20.19.1（LTS版本），让我们尝试清理一下并重新安装：
 rm -rf node_modules package-lock.json && npm install
 -------------------------
+
+将 csv 数据导入到数据库中
+
+backend/RAG_Medical_NLP/bin/python3 backend/tools/create_milvus_db.py
