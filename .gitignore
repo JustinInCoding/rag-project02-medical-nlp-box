@@ -11,6 +11,7 @@ out/
 02.abbr_expansion/
 03.model_mapping/
 04.backup/
+RAG_Medical_NLP/
 
 # Logs
 logs
