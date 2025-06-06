@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AlertCircle } from 'lucide-react';
 import { EmbeddingOptions, TextInput } from '../components/shared/ModelOptions';
+import { API_ENDPOINTS } from '../config';
 
 const StdPage = () => {
   const [input, setInput] = useState('');
@@ -69,7 +70,7 @@ const StdPage = () => {
     setError('');
     setResult('');
     try {
-      const response = await fetch('http://172.20.116.213:8000/api/std', {
+      const response = await fetch(API_ENDPOINTS.STD, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
