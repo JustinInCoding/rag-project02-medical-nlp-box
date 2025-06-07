@@ -20,8 +20,8 @@ class StdService:
     def __init__(self, 
                  provider="huggingface",
                  model="BAAI/bge-m3",
-                 db_path="db/snomed_bge_m3.db",
-                 collection_name="concepts_only_name"):
+                 db_path="db/fin_full_bge_m3.db",
+                 collection_name="fin_concepts_only_name"):
         """
         初始化标准化服务
         

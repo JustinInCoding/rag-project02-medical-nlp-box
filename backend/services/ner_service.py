@@ -38,17 +38,17 @@ class NERService:
             result = result.get('entities', [])
         
         # 合并相关实体（如生物结构和症状）
-        combined_result = self._combine_entities(result, text, options)
+        # combined_result = self._combine_entities(result, text, options)
         
         # 移除重叠实体
-        non_overlapping_result = self._remove_overlapping_entities(combined_result)
+        # non_overlapping_result = self._remove_overlapping_entities(combined_result)
         
         # 根据术语类型过滤实体
-        filtered_result = self._filter_entities(non_overlapping_result, term_types)
+        # filtered_result = self._filter_entities(non_overlapping_result, term_types)
         
         return {
             "text": text,
-            "entities": filtered_result
+            "entities": result
         }
 
     def _combine_entities(self, result, text, options):
@@ -61,13 +61,13 @@ class NERService:
             entity = result[i]
             entity['score'] = float(entity['score'])
 
-            if options['combineBioStructure'] and entity['entity_group'] in ['SIGN_SYMPTOM', 'DISEASE_DISORDER']:
-                # 检查并合并生物结构
-                combined_entity = self._try_combine_with_bio_structure(result, i, text)
-                if combined_entity:
-                    combined_result.append(combined_entity)
-                    i += 1
-                    continue
+            # if options['combineBioStructure'] and entity['entity_group'] in ['SIGN_SYMPTOM', 'DISEASE_DISORDER']:
+            #     # 检查并合并生物结构
+            #     combined_entity = self._try_combine_with_bio_structure(result, i, text)
+            #     if combined_entity:
+            #         combined_result.append(combined_entity)
+            #         i += 1
+            #         continue
             combined_result.append(entity)
             i += 1
         return combined_result

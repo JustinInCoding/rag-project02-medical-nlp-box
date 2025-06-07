@@ -11,30 +11,30 @@ const StdPage = () => {
   
   // 重新组织选项结构，默认选中所有选项
   const [options, setOptions] = useState({
-    disease: true,
-    combineBioStructure: true,
-    medicine: true,
-    laboratory: true,
-    physicalExamination: true,
-    surgeryProcedure: true,
-    radiology: true,
-    commonMedicalObservations: true,
-    lifestyleObservations: true,
-    cognitiveBehaviorItems: true,
-    allMedicalTerms: true,
+    // disease: true,
+    // combineBioStructure: true,
+    // medicine: true,
+    // laboratory: true,
+    // physicalExamination: true,
+    // surgeryProcedure: true,
+    // radiology: true,
+    // commonMedicalObservations: true,
+    // lifestyleObservations: true,
+    // cognitiveBehaviorItems: true,
+    allFinancialTerms: true,
   });
 
   const [embeddingOptions, setEmbeddingOptions] = useState({
     provider: 'huggingface',
     model: 'BAAI/bge-m3',
-    dbName: 'snomed_bge_m3',
-    collectionName: 'concepts_only_name'
+    dbName: 'fin_full_bge_m3',
+    collectionName: 'fin_concepts_only_name'
   });
 
   const handleOptionChange = (e) => {
     const { name, checked } = e.target;
     
-    if (name === 'allMedicalTerms') {
+    if (name === 'allFinancialTerms') {
       // 如果选择 allMedicalTerms，则设置所有选项为相同状态
       setOptions(prevOptions => {
         const newOptions = {};
@@ -51,7 +51,7 @@ const StdPage = () => {
         // 如果取消选择任何一个选项，allMedicalTerms 也取消选择
         allMedicalTerms: checked && 
           Object.entries(prevOptions)
-            .filter(([key]) => key !== 'allMedicalTerms' && key !== name)
+            .filter(([key]) => key !== 'allFinancialTerms' && key !== name)
             .every(([, value]) => value)
       }));
     }
@@ -119,7 +119,7 @@ const StdPage = () => {
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">术语类型</h2>
           <div className="space-y-3">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <input
                 type="checkbox"
                 id="disease"
@@ -142,9 +142,9 @@ const StdPage = () => {
                   <label htmlFor="combineBioStructure">合并生物结构</label>
                 </div>
               )}
-            </div>
+            </div> */}
             
-            {[
+            {/* {[
               ['medicine', '药物'],
               ['laboratory', '实验室检查'],
               ['physicalExamination', '体格检查'],
@@ -165,18 +165,19 @@ const StdPage = () => {
                 />
                 <label htmlFor={key}>{label}</label>
               </div>
-            ))}
+            ))} */}
             
             <div className="flex items-center pt-4 border-t">
               <input
                 type="checkbox"
-                id="allMedicalTerms"
-                name="allMedicalTerms"
-                checked={options.allMedicalTerms}
+                id="allFinancialTerms"
+                name="allFinancialTerms"
+                checked={options.allFinancialTerms}
                 onChange={handleOptionChange}
+                disabled={true}
                 className="mr-2"
               />
-              <label htmlFor="allMedicalTerms" className="font-semibold">所有医疗术语</label>
+              <label htmlFor="allFinancialTerms" className="font-semibold">所有金融术语</label>
             </div>
           </div>
         </div>

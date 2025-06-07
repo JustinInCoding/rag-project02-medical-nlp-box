@@ -56,11 +56,11 @@ class EmbeddingOptions(BaseModel):
         description="嵌入模型名称"
     )
     dbName: str = Field(
-        default="snomed_bge_m3",
+        default="fin_full_bge_m3",
         description="向量数据库名称"
     )
     collectionName: str = Field(
-        default="concepts_only_name",
+        default="fin_concepts_only_name",
         description="集合名称"
     )
 
@@ -168,8 +168,8 @@ async def standardization(input: TextInput):
         logger.info(f"Received request: text={input.text}, options={input.options}, embeddingOptions={input.embeddingOptions}")
 
         # 配置术语类型
-        all_medical_terms = input.options.pop('allMedicalTerms', False)
-        term_types = {'allMedicalTerms': all_medical_terms}
+        all_financial_terms = input.options.pop('allFinancialTerms', False)
+        term_types = {'allFinancialTerms': all_financial_terms}
 
         # 进行命名实体识别
         ner_results = ner_service.process(input.text, input.options, term_types)
@@ -185,7 +185,7 @@ async def standardization(input: TextInput):
         # 获取识别到的实体
         entities = ner_results.get('entities', [])
         if not entities:
-            return {"message": "No medical terms have been recognized", "standardized_terms": []}
+            return {"message": "No financial terms have been recognized", "standardized_terms": []}
 
         # 标准化每个实体
         standardized_results = []
@@ -198,7 +198,7 @@ async def standardization(input: TextInput):
             })
 
         return {
-            "message": f"{len(entities)} medical terms have been recognized and standardized",
+            "message": f"{len(entities)} financial terms have been recognized and standardized",
             "standardized_terms": standardized_results
         }
 
